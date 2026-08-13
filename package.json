@@ -1,0 +1,65 @@
+{
+  "name": "aadm-app",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc -b --pretty false",
+    "check": "npm run typecheck && npm run build",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate:local": "wrangler d1 migrations apply DB --local",
+    "db:migrate:remote": "wrangler d1 migrations apply DB --remote",
+    "db:seed:local": "wrangler d1 execute DB --local --file=src/db/seed/demo.sql",
+    "db:check:local": "wrangler d1 execute DB --local --file=src/db/queries/health-check.sql",
+    "db:check-auth:local": "wrangler d1 execute DB --local --file=src/db/queries/auth-check.sql",
+    "db:check-payments:local": "wrangler d1 execute DB --local --file=src/db/queries/payment-check.sql",
+    "db:check-imports:local": "wrangler d1 execute DB --local --file=src/db/queries/import-check.sql",
+    "db:check-reminders:local": "wrangler d1 execute DB --local --file=src/db/queries/reminder-check.sql",
+    "test:lot10": "npm run build && node tests/lot10-integration.mjs",
+    "test:lot11": "npm run build && node tests/lot11-integration.mjs",
+    "test:lot12": "npm run build && node tests/lot12-integration.mjs",
+    "test:lot13": "npm run build && node tests/lot13-integration.mjs",
+    "test:lot14": "npm run build && node tests/lot14-integration.mjs",
+    "test:lot15": "npm run build && node tests/lot15-integration.mjs",
+    "test:lot16": "npm run build && node tests/lot16-integration.mjs",
+    "test:lot17": "npm run build && node tests/lot17-integration.mjs",
+    "test:lot18": "npm run build && node tests/lot18-repatriation-migration.mjs",
+    "test:lot19": "npm run build && node tests/lot19-unique-repatriation-payment.mjs",
+    "admin:promote:remote": "node scripts/promote-first-admin.mjs",
+    "preview": "vite preview",
+    "deploy": "npm run build && npm run db:migrate:remote && wrangler deploy"
+  },
+  "dependencies": {
+    "better-auth": "^1.6.23",
+    "drizzle-orm": "^0.45.2",
+    "hono": "^4.13.1",
+    "lucide-react": "^1.24.0",
+    "qr-scanner": "^1.4.2",
+    "qrcode.react": "^4.2.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.2",
+    "read-excel-file": "^9.3.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.45.0",
+    "@cloudflare/workers-types": "^5.20260715.1",
+    "@tailwindcss/vite": "^4.3.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "drizzle-kit": "^0.31.10",
+    "tailwindcss": "^4.3.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.1.4",
+    "wrangler": "^4.111.0"
+  },
+  "overrides": {
+    "@esbuild-kit/core-utils": {
+      "esbuild": "^0.25.12"
+    }
+  }
+}

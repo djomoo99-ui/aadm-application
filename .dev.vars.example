@@ -1,0 +1,5 @@
+# Copiez ce fichier vers .dev.vars lorsque des secrets seront nécessaires.
+# Ne placez jamais de véritables secrets dans ce fichier d'exemple.
+APP_ENV=local
+AUTH_SECRET=replace-with-a-random-secret-of-at-least-32-characters
+QR_TOKEN_SECRET=replace-with-a-different-random-secret-of-at-least-32-characters
